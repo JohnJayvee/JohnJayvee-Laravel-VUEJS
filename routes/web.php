@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ChangePasswordController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,6 +19,12 @@ use App\Http\Controllers\ContactController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/change-password', [ChangePasswordController::class, 'index']);
+Route::post('/change-password', [ChangePasswordController::class, 'store'])->name('change.password');
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Users Routes
