@@ -11,16 +11,20 @@
                         <form method="POST" action="{{ route('change.password') }}">
                             @csrf
                             {{-- validation message --}}
-
-
-                            {{-- <p class="text-danger"></p> --}}
+                            {{-- @foreach ($errors->all() as $error)
+                            <p class="text-danger">{{ $error }}</p>
+                        @endforeach --}}
                             @foreach ($errors->all() as $error)
                                 <div class="alert alert-danger alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                                    <strong>Error!</strong> {{ $error }}
+                                    <strong>Error!</strong> ✘ {{ $error }}
                                 </div>
                             @endforeach
+
                             {{-- success message --}}
+                            {{-- @if (Session::has('message'))
+                                <p class="alert alert-success">{{ Session::get('message') }}</p>
+                            @endif --}}
                             @if (Session::has('message'))
                                 <div class="alert alert-success alert-dismissible">
                                     <button type="button" class="close" data-dismiss="alert">&times;</button>
