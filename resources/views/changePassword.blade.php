@@ -20,7 +20,18 @@
                             @if (Session::has('message'))
                                 <p class="alert alert-success">{{ Session::get('message') }}</p>
                             @endif
-                            
+                            <div class="form-group row">
+                                <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="name" class="form-control" name="name" value="{{ Auth::user()->name }}" autocomplete="Name">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-md-4 col-form-label text-md-right">Email:</label>
+                                <div class="col-md-6">
+                                    <input id="name" type="email" class="form-control" name="email" value="{{ Auth::user()->email }}" autocomplete="Email">
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label for="password" class="col-md-4 col-form-label text-md-right">Current Password</label>
                                 <div class="col-md-6">

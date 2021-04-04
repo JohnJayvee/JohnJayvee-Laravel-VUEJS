@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
-use Illuminate\Support\Facades\Redirect;
+// use Illuminate\Support\Facades\Redirect;
 
 class ChangePasswordController extends Controller
 {
@@ -39,14 +39,20 @@ class ChangePasswordController extends Controller
     {
 
         $request->validate([
-
+            'name' => ['required'],
+            'email' => ['required'],
             'current_password' => ['required', new MatchOldPassword],
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
 
         ]);
 
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+        User::find(auth()->user()->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->new_password),
+
+        ]);
         // dd('Password change successfully.');
         return redirect()->route('change.password')->with('message', '✔ Profile has been updated!');
     }
