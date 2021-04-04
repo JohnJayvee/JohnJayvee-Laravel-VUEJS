@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 // use Illuminate\Support\Facades\Redirect;
 
-class ChangePasswordController extends Controller
+class UpdateProfileController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -27,7 +27,7 @@ class ChangePasswordController extends Controller
      */
     public function index()
     {
-        return view('changePassword');
+        return view('updateProfile');
     }
     /**
      * Show the application dashboard.
@@ -54,6 +54,6 @@ class ChangePasswordController extends Controller
 
         ]);
         // dd('Password change successfully.');
-        return redirect()->route('change.password')->with('message', '✔ Profile has been updated!');
+        return redirect()->route('change.password')->with('message', '✔ Your account has been updated');
     }
 }

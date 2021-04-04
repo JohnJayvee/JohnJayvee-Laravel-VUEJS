@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ChangePasswordController;
+use App\Http\Controllers\UpdateProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,8 +20,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/change-password', [ChangePasswordController::class, 'index']);
-Route::post('/change-password', [ChangePasswordController::class, 'store'])->name('change.password');
+Route::get('/change-password', [UpdateProfileController::class, 'index']);
+Route::post('/change-password', [UpdateProfileController::class, 'store'])->name('change.password');
 
 
 
