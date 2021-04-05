@@ -48,6 +48,13 @@ class LoginController extends Controller
      * @return void
 
      */
+    // custom username
+    public function username()
+    {
+        $field = (filter_var(request()->username, FILTER_VALIDATE_EMAIL) || !request()->username) ? 'email' : 'username';
+        request()->merge([$field => request()->username]);
+        return $field;
+    }
 
     public function login(Request $request)
 
@@ -64,7 +71,7 @@ class LoginController extends Controller
             return redirect()->route('home');
         } else {
 
-            return redirect()->back()->with('message', 'Invalid username or email and password combination');
+            return redirect()->back()->withErrors(['message' => 'These credentials do not match our records']);
 
             // return redirect()->back()->with('message', 'Invalid username or email and password combination');
             // $request->session()->flash('message', __('auth.failed'));
