@@ -50,6 +50,7 @@ class UpdateProfileController extends Controller
         User::find(auth()->user()->id)->update([
             'name' => $request->name,
             'email' => $request->email,
+            'username' => $request->username,
             'password' => Hash::make($request->new_password),
 
         ]);
