@@ -54,27 +54,22 @@ class LoginController extends Controller
     {
 
         $input = $request->all();
-
-
-
         $this->validate($request, [
-
             'username' => 'required',
-
             'password' => 'required',
-
         ]);
 
-
-
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-
         if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
-
             return redirect()->route('home');
         } else {
 
-            return redirect()->route('login')->with('message', 'These credentials do not match our records.');
+            return redirect()->back()->with('message', 'Invalid username or email and password combination');
+
+            // return redirect()->back()->with('message', 'Invalid username or email and password combination');
+            // $request->session()->flash('message', __('auth.failed'));
+            // return redirect()->back();
+
         }
     }
 }

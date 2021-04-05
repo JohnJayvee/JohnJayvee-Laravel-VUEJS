@@ -55,6 +55,6 @@ class UpdateProfileController extends Controller
 
         ]);
         // dd('Password change successfully.');
-        return redirect()->route('change.password')->with('message', '✔ Your account has been updated');
+        return redirect()->back()->with('message', '✔ Your account has been updated');
     }
 }
