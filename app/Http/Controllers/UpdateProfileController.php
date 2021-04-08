@@ -56,7 +56,7 @@ class UpdateProfileController extends Controller
         ]);
         // dd('Password change successfully.');
         // return redirect()->back()->with('message', '✔ Your account has been updated');
-            return redirect()->back()->withErrors(['message' => 'These credentials do not match our records']);
+            return redirect()->back()->withErrors(['message' => '✔ Your account has been updated']);
 
     }
 }

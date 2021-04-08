@@ -49,34 +49,24 @@ class LoginController extends Controller
 
      */
     // custom username
-    public function username()
+public function username()
     {
-        $field = (filter_var(request()->username, FILTER_VALIDATE_EMAIL) || !request()->username) ? 'email' : 'username';
-        request()->merge([$field => request()->username]);
-        return $field;
+        return 'username'; //or whatever field
     }
-
     public function login(Request $request)
-
     {
-
         $input = $request->all();
-        $this->validate($request, [
-            'username' => 'required',
-            'password' => 'required',
-        ]);
 
         $fieldType = filter_var($request->username, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-        if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
-            return redirect()->route('home');
+
+        if (auth()->validate(array($fieldType => $request->username, 'password' => $request->password))) {
+            if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
+                return response()->json(array('route'=>route('home')));
+            }
         } else {
-
-            return redirect()->back()->withErrors(['message' => 'These credentials do not match our records']);
-
-            // return redirect()->back()->with('message', 'Invalid username or email and password combination');
-            // $request->session()->flash('message', __('auth.failed'));
-            // return redirect()->back();
-
+            $errors = [$this->username() => 'Invalid account.'];
+			return redirect()->back()->withInput($request->only($this->username(), 'remember'))->withErrors($errors);
         }
     }
+
 }
