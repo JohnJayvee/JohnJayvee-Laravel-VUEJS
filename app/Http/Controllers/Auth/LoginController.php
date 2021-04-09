@@ -61,12 +61,23 @@ public function username()
 
         if (auth()->validate(array($fieldType => $request->username, 'password' => $request->password))) {
             if (Auth::attempt(array($fieldType => $input['username'], 'password' => $input['password']))) {
-                return response()->json(array('route'=>route('home')));
+                // return response()->json(array('route'=>route('home')));
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'Success',
+                    'user' => Auth::user()
+                ]);
             }
         } else {
-            $errors = [$this->username() => 'Invalid account.'];
-			return redirect()->back()->withInput($request->only($this->username(), 'remember'))->withErrors($errors);
+            return response()->json([
+                'status' => 1,
+                'message' => 'Invalid account.'
+            ])->setStatusCode(403);
         }
+    }
+
+    public function getUser(Request $request) {
+        return $request->user();
     }
 
 }
