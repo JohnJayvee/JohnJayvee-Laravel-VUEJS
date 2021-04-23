@@ -51,7 +51,7 @@ Route::any('{any}', [VueController::class, 'index'])->where('any', '^(?!api).*$'
 // */
 // Route::middleware(['auth'])->group(function () {
 
-//     Route::get('/contacts/create/', [ContactController::class, 'create'])->name('contact.create');
+// Route::get('/contacts/create/', [ContactController::class, 'create'])->name('contact.create');
 //     Route::get('/contacts', [ContactController::class, 'index'])->name('contact.index');
 //     Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('contact.show');
 //     Route::get('/contacts/{id}/edit', [ContactController::class, 'edit'])->name('contact.edit');
@@ -59,6 +59,13 @@ Route::any('{any}', [VueController::class, 'index'])->where('any', '^(?!api).*$'
 //     Route::put('/contacts/{id}/update', [ContactController::class, 'update'])->name('contact.update');
 //     Route::delete('/contacts/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 // });
+
+Route::get('api/contacts/index', [ContactController::class, 'index'])->name('contact.index');
+Route::delete('api/contacts/delete/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
+Route::put('api/contacts/update/{id}', [ContactController::class, 'update'])->name('contact.update');
+Route::get('api/contacts/edit/{id}', [ContactController::class, 'edit'])->name('contact.edit');
+Route::get('api/contacts/show/{id}', [ContactController::class, 'show'])->name('contact.show');
+
 Route::post('api/contacts/store/', [ContactController::class, 'store'])->name('contact.store');
 
 Auth::routes();

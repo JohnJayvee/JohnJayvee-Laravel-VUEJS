@@ -14,12 +14,13 @@ class ContactController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $contacts = Contact::all();
+        public function index()
+        {
+            $contacts = Contact::all();
 
-        return view('contacts.index', compact('contacts'));
-    }
+            // return view('contacts.index', compact('contacts'));
+            return response()->json(compact('contacts'));
+        }
 
     /**
      * Show the form for creating a new resource.
@@ -54,7 +55,11 @@ class ContactController extends Controller
             'country' => $request->get('country')
         ]);
         $contact->save();
-        return redirect('/contacts')->with('success', 'Contact saved!');
+        // return redirect('/contacts')->with('success', 'Contact saved!');
+        return response()->json([
+            'status' => 0,
+            'message' => 'Success'
+        ]);
     }
 
     /**
@@ -65,8 +70,10 @@ class ContactController extends Controller
      */
     public function show($id)
     {
-        $contact = Contact::find($id);
-        return view('contacts.show', compact('contact'));
+        $contacts = Contact::find($id);
+        // return view('contacts.show', compact('contact'));
+        return response()->json(compact('contacts'));
+
     }
 
     /**
@@ -77,8 +84,9 @@ class ContactController extends Controller
      */
     public function edit($id)
     {
-        $contact = Contact::find($id);
-        return view('contacts.edit', compact('contact'));
+        $contacts = Contact::find($id);
+        // return view('contacts.edit', compact('contact'));
+        return response()->json(compact('contacts'));
     }
 
     /**
@@ -121,6 +129,12 @@ class ContactController extends Controller
         $contact = Contact::find($id);
         $contact->delete();
 
-        return redirect('/contacts')->with('success', 'Contact deleted!');
+        // return redirect('/contacts')->with('success', 'Contact deleted!');
+
+        return response()->json([
+            'status' => 0,
+            'message' => 'Success'
+        ]);
+
     }
 }

@@ -32,7 +32,7 @@
                                 <a href="{{ route('contact.edit', $contact->id) }}" class="btn btn-primary">Edit</a>
                             </td>
                             <td>
-                                <form method="post" action="{{ route('contact.destroy', $contact->id) }}" >
+                                <form method="post" action="{{ route('contact.destroy', $contact->id) }}">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -56,3 +56,5 @@
         <div>
             <a style="margin: 19px;" href="{{ route('contact.create') }}" class="btn btn-primary">New contact</a>
         </div>
+    </div>
+</div>
